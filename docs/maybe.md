@@ -16,12 +16,9 @@ Returns `Maybe.just(t)` if `t` is not null nor undefined, otherwise returns `May
 - #### `new Maybe<T>(type: MaybeType, value?: T)`
 Build a Maybe object. For internal use only.
 
-    - `type: MaybeType` Indicates if the Maybe content is a Just or a Nothing.
-    - `value: T` The value to wrap (optional).
-
 ## Helpers
 
-- #### `isJust<T>(t: Maybe<T>): boolean`
+- #### `Maybe.isJust<T>(t: Maybe<T>): boolean`
 Helper function to check whether a Maybe is of the Just type.
 
 ```js
@@ -29,10 +26,10 @@ Maybe.isJust(Maybe.just(4)) // => true
 Maybe.isJust(Maybe.nothing()) // => false
 ```
 
-- #### `isNothing<T>(t: Maybe<T>): boolean`
+- #### `Maybe.isNothing<T>(t: Maybe<T>): boolean`
 Helper function to check whether a Maybe is of the Nothing type.
 
-- #### `sequence<T>(t: object): Maybe<object>`
+- #### `Maybe.sequence<T>(t: object): Maybe<object>`
 **Aliases**: *sequence, all*
 
 Helper function to convert a map of Maybe objects into a Maybe of a map of objects.
