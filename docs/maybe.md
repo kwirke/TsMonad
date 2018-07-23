@@ -16,8 +16,8 @@ Returns `Maybe.just(t)` if `t` is not null nor undefined, otherwise returns `May
 - #### `new Maybe<T>(type: MaybeType, value?: T)`
 Build a Maybe object. For internal use only.
 
-- `type: MaybeType` Indicates if the Maybe content is a Just or a Nothing.
-- `value: T` The value to wrap (optional).
+    - `type: MaybeType` Indicates if the Maybe content is a Just or a Nothing.
+    - `value: T` The value to wrap (optional).
 
 ## Helpers
 
@@ -109,4 +109,23 @@ Maybe.just(6).valueOr(3) // => 6
 Maybe.nothing().valueOr(3) // => 3
 ```
 
+- #### `valueOrCompute<U extends T>(defaultValueFunction: () => U): T|U`
+Unwrap a Maybe with a default value computed from a thunk.
 
+```js
+Maybe.nothing().valueOrCompute(() => 3) // => 3
+```
+
+- #### `valueOrThrow(error?: Error): T`
+Unwrap a Maybe throwing if it is nothing.
+
+- #### `do(patterns: Partial<MaybePatterns<T, void>> = {}): Maybe<T>`
+Execute a function based on the Maybe content. Returns the original value, 
+so is meant for running functions with side-effects.
+
+```js
+Maybe.just('do it').do({
+    just: console.log,
+    nothing: () => {console.error('nothing is impossible');},
+}).valueOr(null) // => 'do it'
+```
